@@ -1,4 +1,4 @@
-let pokemonList [
+let pokemonList = [
   {
     name: 'Bulbasaur',
     number: 001,
