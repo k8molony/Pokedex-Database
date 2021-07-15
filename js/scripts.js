@@ -11,7 +11,7 @@ let pokemonList = [
     name: 'Charmander',
     number: 004,
     height: 2,
-    tyoe: 'fire',
+    type: 'fire',
     weakness: ['water', 'ground', 'rock'],
     evolutions: ['Charmeleon', 'Charizard'],
   },
