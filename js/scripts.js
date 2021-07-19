@@ -33,13 +33,13 @@ let pokemonList = [
   }
 ];
 
-//Creates list of pokemon and their sizes. 
+//Creates list of pokemon and their sizes.
 for (let i=0; i < pokemonList.length; i++) {
-    document.write(pokemonList[i].name + " is " + pokemonList[i].height + " tall. <br>"); {
+    document.write("<p>" + pokemonList[i].name + " is " + pokemonList[i].height + " tall."); {
       if (pokemonList[i].height > 2) {
-        document.write(" Wow! That\'s big! <br>");
+        document.write(" Wow! That\'s big! </p>");
       } else if (pokemonList[i].height < 2) {
-        document.write(" Wow! That\'s tiny! <br>");
+        document.write(" Whoa! That\'s tiny! </p>");
       }
     }
 }
