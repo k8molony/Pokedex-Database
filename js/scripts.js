@@ -32,3 +32,13 @@ let pokemonList = [
     evolutions: ['Pichu', 'Raichu'],
   }
 ];
+
+for (let i=0; i < pokemonList.length; i++) {
+    document.write(pokemonList[i].name + " is " + pokemonList[i].height + " tall. <br>"); {
+      if (pokemonList[i].height > 2) {
+        document.write(" Wow! That\'s big! <br>");
+      } else if (pokemonList[i].height < 2) {
+        document.write(" Wow! That\'s tiny! <br>");
+      }
+    }
+}
