@@ -33,6 +33,7 @@ let pokemonList = [
   }
 ];
 
+//Creates list of pokemon and their sizes. 
 for (let i=0; i < pokemonList.length; i++) {
     document.write(pokemonList[i].name + " is " + pokemonList[i].height + " tall. <br>"); {
       if (pokemonList[i].height > 2) {
