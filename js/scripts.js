@@ -48,18 +48,26 @@ let pokemonRepository = (function () {
   };
 })();
 
-//Creates list of pokemon and their sizes.
-for (let i=0; i < pokemonList.length; i++) {
-    document.write("<p>" + pokemonList[i].name + " is " + pokemonList[i].height + " tall."); {
-      if (pokemonList[i].height > 2) {
+pokemonRepository.add(
+  {
+    name: 'Meowth',
+    number: 052,
+    height: 1.04,
+    type: 'normal',
+    weakness: 'fighting',
+    evolutions: ['Persian'],
+  }
+)
+
+console.log(pokemonRepository.getAll());
+
+//Creates list of pokemon including type and size.
+pokemonRepository.getAll().forEach(function(pokemon) {
+    document.write("<p>" + pokemon.name + " is a " + pokemon.type + " type. Height: " + pokemon.height + "."); {
+      if (pokemon.height > 2) {
         document.write(" Wow! That\'s big! </p>");
-      } else if (pokemonList[i].height < 2) {
+      } else if (pokemon.height < 1.05) {
         document.write(" Whoa! That\'s tiny! </p>");
       }
     }
-}
-
-//Creates list of Pokemon and their types
-pokemonList.forEach(function(pokemon) {
-  document.write('<p>' + pokemon.name + ' is ' + pokemon.type + ' type.' + '</p>');
 })
