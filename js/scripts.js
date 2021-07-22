@@ -43,3 +43,7 @@ for (let i=0; i < pokemonList.length; i++) {
       }
     }
 }
+
+pokemonList.forEach(function(pokemon) {
+  document.write('<p>' + pokemon.name + ' is ' + pokemon.type + ' type.' + '</p>');
+})
