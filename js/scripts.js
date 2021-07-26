@@ -84,17 +84,7 @@ pokemonRepository.add(
 
 console.log(pokemonRepository.getAll());
 
-//Creates list of pokemon including type and size.
-/*pokemonRepository.getAll().forEach(function(pokemon) {
-    document.write("<p>" + pokemon.name + " is a " + pokemon.type + " type. Height: " + pokemon.height + "."); {
-      if (pokemon.height > 2) {
-        document.write(" Wow! That\'s big! </p>");
-      } else if (pokemon.height < 1.05) {
-        document.write(" Whoa! That\'s tiny! </p>");
-      }
-    }
-})*/
-
+//Creates list of pokemon.
 pokemonRepository.getAll().forEach(function (pokemon) {
   pokemonRepository.addListItem(pokemon);
 });
