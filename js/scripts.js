@@ -34,6 +34,7 @@ let pokemonRepository = (function () {
     }
   ];
 
+  // Adds a pokemon with all attributes
   function add(pokemon) {
     if (
       typeof pokemon === "object" &&
@@ -50,27 +51,39 @@ let pokemonRepository = (function () {
     }
   }
 
+  // Returns a pokemonList
   function getAll() {
     return pokemonList;
   }
 
+  //logs details to console
+  function showDetails(pokemon){
+    console.log(pokemon);
+  }
+
+  //Creates buttons for each item in the pokemonList
   function addListItem(pokemon) {
-    let pokemonList = document.querySelector(".pokemon-list");
-    let listpokemon = document.createElement("li");
-    let button = document.createElement("button");
+    let pokemonList = document.querySelector('.pokemon-list');
+    let listpokemon = document.createElement('li');
+    let button = document.createElement('button');
     button.innerText = pokemon.name;
-    button.classList.add("button-class");
+    button.classList.add('button-class');
     listpokemon.appendChild(button);
     pokemonList.appendChild(listpokemon);
+      button.addEventListener('click', function(){
+        showDetails(pokemon);
+      });
   }
 
   return {
     add: add,
     getAll: getAll,
-    addListItem: addListItem
+    addListItem: addListItem,
+    showDetails: showDetails
   };
 })();
 
+//Adds a pokemon to the repository
 pokemonRepository.add(
   {
     name: 'Meowth',
@@ -82,7 +95,8 @@ pokemonRepository.add(
   }
 )
 
-console.log(pokemonRepository.getAll());
+//logs all pokemon to the console
+//console.log(pokemonRepository.getAll());
 
 //Creates list of pokemon.
 pokemonRepository.getAll().forEach(function (pokemon) {
