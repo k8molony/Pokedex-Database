@@ -1,49 +1,13 @@
+//creates pokemon repository
 let pokemonRepository = (function () {
-  let pokemonList = [
-    {
-      name: 'Bulbasaur',
-      number: 001,
-      height: 2.4,
-      type: ['grass', 'poison'],
-      weakness: ['fire', 'psychic', 'flying', 'ice'],
-      evolutions: ['Ivysaur', 'Venusaur'],
-    },
-    {
-      name: 'Charmander',
-      number: 004,
-      height: 2,
-      type: 'fire',
-      weakness: ['water', 'ground', 'rock'],
-      evolutions: ['Charmeleon', 'Charizard'],
-    },
-    {
-      name: 'Squirtle',
-      number: 007,
-      height: 1.08,
-      type: 'water',
-      weakness: ['grass', 'electric'],
-      evolutions: ['Wartortle', 'Blastoise'],
-    },
-    {
-      name: 'Pikachu',
-      number: 025,
-      height: 1.04,
-      type: 'electric',
-      weakness: 'ground',
-      evolutions: ['Pichu', 'Raichu'],
-    }
-  ];
+  let pokemonList = [];
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-  // Adds a pokemon with all attributes
+  // Adds a pokemon with all desired attributes
   function add(pokemon) {
     if (
       typeof pokemon === "object" &&
-      "name" in pokemon &&
-      "number" in pokemon &&
-      "height" in pokemon &&
-      "type" in pokemon &&
-      "weakness" in pokemon &&
-      "evolutions" in pokemon
+      "name" in pokemon
     ) {
       pokemonList.push(pokemon);
     } else {
@@ -75,30 +39,34 @@ let pokemonRepository = (function () {
       });
   }
 
+  function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    })
+  }
+
   return {
     add: add,
     getAll: getAll,
+    loadList: loadList,
     addListItem: addListItem,
     showDetails: showDetails
   };
 })();
 
-//Adds a pokemon to the repository
-pokemonRepository.add(
-  {
-    name: 'Meowth',
-    number: 052,
-    height: 1.04,
-    type: 'normal',
-    weakness: 'fighting',
-    evolutions: ['Persian'],
-  }
-)
-
-//logs all pokemon to the console
-//console.log(pokemonRepository.getAll());
-
-//Creates list of pokemon.
-pokemonRepository.getAll().forEach(function (pokemon) {
-  pokemonRepository.addListItem(pokemon);
+//Creates list of pokemon on the HTML page
+pokemonRepository.loadList().then(function() {
+  pokemonRepository.getAll().forEach(function(pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
 });
