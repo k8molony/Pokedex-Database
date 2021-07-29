@@ -3,11 +3,12 @@ let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-  // Adds a pokemon with all desired attributes
+  // Adds new pokemon to the pokemonList array with a conditional to make sure the correct type of data is entered
   function add(pokemon) {
     if (
       typeof pokemon === "object" &&
-      "name" in pokemon
+      "name" in pokemon &&
+      "detailsUrl" in pokemon
     ) {
       pokemonList.push(pokemon);
     } else {
@@ -22,10 +23,12 @@ let pokemonRepository = (function () {
 
   //logs details to console
   function showDetails(pokemon){
-    console.log(pokemon);
+    loadDetails(pokemon).then(function () {
+      console.log(pokemon);
+    });
   }
 
-  //Creates buttons for each item in the pokemonList
+  //Function that adds a list of pokemon to the DOM, with buttons in an unordered list
   function addListItem(pokemon) {
     let pokemonList = document.querySelector('.pokemon-list');
     let listpokemon = document.createElement('li');
@@ -55,10 +58,24 @@ let pokemonRepository = (function () {
     })
   }
 
+  function loadDetails (item) {
+    let url = item.detailsUrl;
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function (e) {
+      console.error(e);
+    });
+  }
+
   return {
     add: add,
     getAll: getAll,
     loadList: loadList,
+    loadDetails: loadDetails,
     addListItem: addListItem,
     showDetails: showDetails
   };
