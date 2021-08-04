@@ -2,6 +2,7 @@
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  let modalContainer = document.querySelector('#modal-container');
 
   // Adds new pokemon to the pokemonList array with a conditional to make sure the correct type of data is entered
   function add(pokemon) {
@@ -21,10 +22,10 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
-  //logs details to console
+  //shows details in modal
   function showDetails(pokemon){
     loadDetails(pokemon).then(function () {
-      console.log(pokemon);
+      showModal(pokemon);
     });
   }
 
@@ -42,13 +43,14 @@ let pokemonRepository = (function () {
       });
   }
 
+  //function that retreives items from the pokemon api
   function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
       json.results.forEach(function (item) {
         let pokemon = {
-          name: item.name,
+          name: item.name.toUpperCase(),
           detailsUrl: item.url
         };
         add(pokemon);
@@ -58,18 +60,112 @@ let pokemonRepository = (function () {
     })
   }
 
-  function loadDetails (item) {
-    let url = item.detailsUrl;
+  //function to load details for each pokemon from the api
+  function loadDetails (pokemon) {
+    let url = pokemon.detailsUrl;
     return fetch(url).then(function (response) {
       return response.json();
     }).then(function (details) {
-      item.imageUrl = details.sprites.front_default;
-      item.height = details.height;
-      item.types = details.types;
+      pokemon.imageUrl = details.sprites.front_default;
+      pokemon.height = details.height;
+      pokemon.types = details.types;
     }).catch(function (e) {
       console.error(e);
     });
   }
+
+  //function to create modal to display details
+  function showModal(pokemon) {
+    modalContainer.innerHTML = '';
+    let modal = document.createElement('div');
+    modal.classList.add('modal');
+
+    let closeButtonElement = document.createElement('button');
+    closeButtonElement.classList.add('modal-close');
+    closeButtonElement.innerText = 'Close';
+    closeButtonElement.addEventListener('click', hideModal);
+
+    let titleElement = document.createElement('h1');
+    titleElement.innerText = pokemon.name.toUpperCase();
+    titleElement.classList.add('title');
+
+    let heightElement = document.createElement('p');
+    heightElement.innerText = 'Height: ' + pokemon.height;
+    heightElement.classList.add('height');
+
+    let imgElement = document.createElement('img');
+    imgElement.src = pokemon.imageUrl;
+    imgElement.classList.add('img');
+
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(titleElement);
+    modal.appendChild(heightElement);
+    modal.appendChild(imgElement);
+    modalContainer.appendChild(modal);
+
+    modalContainer.classList.add('is-visible');
+  }
+
+  //function to hide the modal
+  function hideModal() {
+    modalContainer.classList.remove('is-visible');
+  }
+
+
+  /*function showDialog(title, text) {
+    showModal(title, text);
+
+    let modal = modalContainer.querySelector('.modal');
+
+    let confirmButton = document.createElement('button');
+    confirmButton.classList.add('modal-confirm');
+    confirmButton.innerText = 'Confirm';
+
+    let cancelButton = document.createElement('button');
+    cancelButton.classList.add('modal-cancel');
+    cancelButton.innerText = 'Cancel';
+
+    modal.appendChild(confirmButton);
+    modal.appendChild(cancelButton);
+
+    confirmButton.focus();
+
+    return new Promise((resolve, reject) => {
+      cancelButton.addEventListener('click', hideModal);
+      confirmButton.addEventListener('click', () => {
+        dialogPromiseReject = null;
+        hideModal();
+        resolve();
+      });
+
+      dialogPromiseReject = reject;
+    });
+  }
+
+  document.querySelector('#show-modal').addEventListener('click', () => {
+    showModal(item.name, item.url);
+  });
+
+  document.querySelector('#show-dialog').addEventListener('click', () => {
+    showDialog('Confirm action', 'Are you sure you want to do this?').then(function() {
+      alert('confirmed!');
+    }, () => {
+      alert('not confirmed');
+    });
+  });*/
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+      hideModal();
+    }
+  });
+
+  modalContainer.addEventListener('click', (e) => {
+    if (e.target === modalContainer) {
+      hideModal();
+    }
+  });
+
 
   return {
     add: add,
@@ -81,7 +177,7 @@ let pokemonRepository = (function () {
   };
 })();
 
-//Creates list of pokemon on the HTML page
+//Loads list of pokemon from the Url and adds them to the pokemonList array
 pokemonRepository.loadList().then(function() {
   pokemonRepository.getAll().forEach(function(pokemon) {
     pokemonRepository.addListItem(pokemon);
