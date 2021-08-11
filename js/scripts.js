@@ -2,7 +2,10 @@
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+<<<<<<< HEAD
   //let modalContainer = document.querySelector('#modal-container');
+=======
+>>>>>>> parent of 3d4081b (Added code for modals)
 
   // Adds new pokemon to the pokemonList array with a conditional to make sure the correct type of data is entered
   function add(pokemon) {
@@ -22,10 +25,17 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
+<<<<<<< HEAD
   //shows details in modal
   function showDetails(item){
     loadDetails(item).then(function () {
       showModal(item);
+=======
+  //logs details to console
+  function showDetails(pokemon){
+    loadDetails(pokemon).then(function () {
+      console.log(pokemon);
+>>>>>>> parent of 3d4081b (Added code for modals)
     });
   }
 
@@ -50,14 +60,13 @@ let pokemonRepository = (function () {
       });
   }
 
-  //function that retreives items from the pokemon api
   function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
       json.results.forEach(function (item) {
         let pokemon = {
-          name: item.name.toUpperCase(),
+          name: item.name,
           detailsUrl: item.url
         };
         add(pokemon);
@@ -67,14 +76,21 @@ let pokemonRepository = (function () {
     })
   }
 
+<<<<<<< HEAD
   //function to load details for each pokemon from the api
+=======
+>>>>>>> parent of 3d4081b (Added code for modals)
   function loadDetails (item) {
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
       return response.json();
     }).then(function (details) {
+<<<<<<< HEAD
       item.imageUrlFront = details.sprites.front_default;
       item.imageUrlBack = details.sprites.back_default;
+=======
+      item.imageUrl = details.sprites.front_default;
+>>>>>>> parent of 3d4081b (Added code for modals)
       item.height = details.height;
       item.types = details.types;
     }).catch(function (e) {
@@ -82,6 +98,7 @@ let pokemonRepository = (function () {
     });
   }
 
+<<<<<<< HEAD
   //function to create modal to display details
   function showModal(item) {
     let modalBody = $(".modal-body");
@@ -151,6 +168,8 @@ let pokemonRepository = (function () {
     }
   }); */
 
+=======
+>>>>>>> parent of 3d4081b (Added code for modals)
   return {
     add: add,
     getAll: getAll,
@@ -162,7 +181,7 @@ let pokemonRepository = (function () {
   };
 })();
 
-//Loads list of pokemon from the Url and adds them to the pokemonList array
+//Creates list of pokemon on the HTML page
 pokemonRepository.loadList().then(function() {
   pokemonRepository.getAll().forEach(function(pokemon) {
     pokemonRepository.addListItem(pokemon);
