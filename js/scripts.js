@@ -3,9 +3,13 @@ let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 <<<<<<< HEAD
+<<<<<<< HEAD
   //let modalContainer = document.querySelector('#modal-container');
 =======
 >>>>>>> parent of 3d4081b (Added code for modals)
+=======
+  let modalContainer = document.querySelector('#modal-container');
+>>>>>>> parent of aa75f9d (Added bootstrap)
 
   // Adds new pokemon to the pokemonList array with a conditional to make sure the correct type of data is entered
   function add(pokemon) {
@@ -27,6 +31,7 @@ let pokemonRepository = (function () {
 
 <<<<<<< HEAD
   //shows details in modal
+<<<<<<< HEAD
   function showDetails(item){
     loadDetails(item).then(function () {
       showModal(item);
@@ -36,26 +41,24 @@ let pokemonRepository = (function () {
     loadDetails(pokemon).then(function () {
       console.log(pokemon);
 >>>>>>> parent of 3d4081b (Added code for modals)
+=======
+  function showDetails(pokemon){
+    loadDetails(pokemon).then(function () {
+      showModal(pokemon);
+>>>>>>> parent of aa75f9d (Added bootstrap)
     });
   }
 
   //Function that adds a list of pokemon to the DOM, with buttons in an unordered list
   function addListItem(pokemon) {
     let pokemonList = document.querySelector('.pokemon-list');
-
-    let listItem = document.createElement('li');
-    listItem.classList.add('group-list-item');
-
-    let pokemonButton = document.createElement('button');
-    pokemonButton.innerText = pokemon.name;
-    pokemonButton.classList.add('pokemon-button', 'btn', 'btn-primary');
-    pokemonButton.setAttribute('data-target', '#pokemonModal');
-    pokemonButton.setAttribute('data-toggle', 'modal');
-
-    listItem.appendChild(pokemonButton);
-    //pokemonList.appendChild(listItem);
-
-    pokemonButton.addEventListener('click', function() {
+    let listpokemon = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('button-class');
+    listpokemon.appendChild(button);
+    pokemonList.appendChild(listpokemon);
+      button.addEventListener('click', function(){
         showDetails(pokemon);
       });
   }
@@ -78,6 +81,7 @@ let pokemonRepository = (function () {
 
 <<<<<<< HEAD
   //function to load details for each pokemon from the api
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 3d4081b (Added code for modals)
   function loadDetails (item) {
@@ -93,6 +97,16 @@ let pokemonRepository = (function () {
 >>>>>>> parent of 3d4081b (Added code for modals)
       item.height = details.height;
       item.types = details.types;
+=======
+  function loadDetails (pokemon) {
+    let url = pokemon.detailsUrl;
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+      pokemon.imageUrl = details.sprites.front_default;
+      pokemon.height = details.height;
+      pokemon.types = details.types;
+>>>>>>> parent of aa75f9d (Added bootstrap)
     }).catch(function (e) {
       console.error(e);
     });
@@ -100,28 +114,8 @@ let pokemonRepository = (function () {
 
 <<<<<<< HEAD
   //function to create modal to display details
-  function showModal(item) {
-    let modalBody = $(".modal-body");
-    let modalTitle = $(".modal-title");
-    let modalHeader = $(".modal-header");
-    modalTitle.empty();
-    modalBody.empty();
-
-    let nameElement = $("<h1>" + item.name + "</h1>");
-    let imageElementFront = $('<img class="modal-img" style="width:50%">');
-    imageElementFront.attr("src", item.imageUrlFront);
-    let imageElementBack = $('<img class="modal-img" style="width:50%">');
-    imageElementBack.attr("src", item.imageUrlBack);
-    let heightElement = $("<p>" + "Height: " + item.height);
-    let typesElement = $("<p>" + "Types: " + item.types);
-
-    modalTitle.append(nameElement);
-    modalBody.append(imageElementFront);
-    modalBody.append(imageElementBack);
-    modalBody.append(heightElement);
-    modalBody.append(typesElement);
-
-    /*modalContainer.innerHTML = '';
+  function showModal(pokemon) {
+    modalContainer.innerHTML = '';
     let modal = document.createElement('div');
     modal.classList.add('modal');
 
@@ -145,13 +139,13 @@ let pokemonRepository = (function () {
     modal.appendChild(closeButtonElement);
     modal.appendChild(titleElement);
     modal.appendChild(heightElement);
-    modal.appendChild(imgElement);*/
-    //modalContainer.appendChild(modal);
+    modal.appendChild(imgElement);
+    modalContainer.appendChild(modal);
 
-    //modalContainer.classList.add('is-visible');
+    modalContainer.classList.add('is-visible');
   }
 
-  /*function to hide the modal
+  //function to hide the modal
   function hideModal() {
     modalContainer.classList.remove('is-visible');
   }
@@ -166,7 +160,7 @@ let pokemonRepository = (function () {
     if (e.target === modalContainer) {
       hideModal();
     }
-  }); */
+  });
 
 =======
 >>>>>>> parent of 3d4081b (Added code for modals)
@@ -176,8 +170,7 @@ let pokemonRepository = (function () {
     loadList: loadList,
     loadDetails: loadDetails,
     addListItem: addListItem,
-    showDetails: showDetails,
-    showModal: showModal
+    showDetails: showDetails
   };
 })();
 
