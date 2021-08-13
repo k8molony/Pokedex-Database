@@ -12,20 +12,41 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <span class="navbar-brand mb-0 h1"> Pokédex</span>
-      <span class="text-center">List of First Generation Pokemon. Click for stats!</span>
-    </nav>
+    <header class="page-header">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <span class="navbar-brand mb-0 h1"> Pokédex</span>
+        <span class="text-center">List of First Generation Pokemon. Click for stats!</span>
+      </nav>
+    </header>
 
     <main class="container">
       <div class="row">
         <div class="col-sm"></div>
         <div class="col-sm">
-        <ul class='pokemon-list list-unstyled'></ul>
-        <button type="button" class="btn-lg btn-primary"></button>
+          <ul class='pokemon-list list-group list-unstyled'></ul>
+          <button type="button" class="btn-lg btn-primary" data-toggle="modal" data-target="#pokemonModal">
+          </button>
+          <div class="modal fade" id="pokemonModal" tabindex="-1" role="dialog" aria-labelledby="pokemonModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-capitalize" id="pokemonModalLabel"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
         <!--button id='show-modal'>Show modal</button-->
         </div>
-        <div id='modal-container'></div>
+        <!--div id='modal-container'></div-->
         <div class="col-sm"></div>
       </div>
 
