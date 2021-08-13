@@ -16,7 +16,7 @@ li {
 .page-header {
   background-color: var(--primary-color);
   padding: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 200px;
 }
 
 #logo {
@@ -27,7 +27,7 @@ body {
   font-family: 'Acme', sans-serif;
   color: var(--text-color);
   background-color: var(--primary-color);
-  margin-top: 60px;
+  margin-top: 150px;
   text-transform: capitalize;
 }
 
