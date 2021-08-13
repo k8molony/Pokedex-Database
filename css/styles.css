@@ -2,7 +2,7 @@
   /* colors */
   --text-color: #313447;
   --primary-color: #afb7ea;
-  --secondary-color: #f7b26f;
+  --secondary-color: #57d2f6;
 }
 
 * {
@@ -11,6 +11,16 @@
 
 li {
   list-style-type: none;
+}
+
+.page-header {
+  background-color: var(--primary-color);
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+#logo {
+  width: 100%;
 }
 
 body {
@@ -40,6 +50,7 @@ body {
   background-color: var(--secondary-color);
   color: var(--text-color);
   width: 250px;
+  padding: 20px;
   margin: 10px;
   text-transform: capitalize;
   border-radius: 30px;
