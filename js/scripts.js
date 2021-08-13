@@ -2,14 +2,7 @@
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
-<<<<<<< HEAD
-<<<<<<< HEAD
-  //let modalContainer = document.querySelector('#modal-container');
-=======
->>>>>>> parent of 3d4081b (Added code for modals)
-=======
   let modalContainer = document.querySelector('#modal-container');
->>>>>>> parent of aa75f9d (Added bootstrap)
 
   // Adds new pokemon to the pokemonList array with a conditional to make sure the correct type of data is entered
   function add(pokemon) {
@@ -29,23 +22,10 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
-<<<<<<< HEAD
   //shows details in modal
-<<<<<<< HEAD
-  function showDetails(item){
-    loadDetails(item).then(function () {
-      showModal(item);
-=======
-  //logs details to console
-  function showDetails(pokemon){
-    loadDetails(pokemon).then(function () {
-      console.log(pokemon);
->>>>>>> parent of 3d4081b (Added code for modals)
-=======
   function showDetails(pokemon){
     loadDetails(pokemon).then(function () {
       showModal(pokemon);
->>>>>>> parent of aa75f9d (Added bootstrap)
     });
   }
 
@@ -63,13 +43,14 @@ let pokemonRepository = (function () {
       });
   }
 
+  //function that retreives items from the pokemon api
   function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
       json.results.forEach(function (item) {
         let pokemon = {
-          name: item.name,
+          name: item.name.toUpperCase(),
           detailsUrl: item.url
         };
         add(pokemon);
@@ -79,25 +60,7 @@ let pokemonRepository = (function () {
     })
   }
 
-<<<<<<< HEAD
   //function to load details for each pokemon from the api
-<<<<<<< HEAD
-=======
->>>>>>> parent of 3d4081b (Added code for modals)
-  function loadDetails (item) {
-    let url = item.detailsUrl;
-    return fetch(url).then(function (response) {
-      return response.json();
-    }).then(function (details) {
-<<<<<<< HEAD
-      item.imageUrlFront = details.sprites.front_default;
-      item.imageUrlBack = details.sprites.back_default;
-=======
-      item.imageUrl = details.sprites.front_default;
->>>>>>> parent of 3d4081b (Added code for modals)
-      item.height = details.height;
-      item.types = details.types;
-=======
   function loadDetails (pokemon) {
     let url = pokemon.detailsUrl;
     return fetch(url).then(function (response) {
@@ -106,13 +69,11 @@ let pokemonRepository = (function () {
       pokemon.imageUrl = details.sprites.front_default;
       pokemon.height = details.height;
       pokemon.types = details.types;
->>>>>>> parent of aa75f9d (Added bootstrap)
     }).catch(function (e) {
       console.error(e);
     });
   }
 
-<<<<<<< HEAD
   //function to create modal to display details
   function showModal(pokemon) {
     modalContainer.innerHTML = '';
@@ -162,8 +123,6 @@ let pokemonRepository = (function () {
     }
   });
 
-=======
->>>>>>> parent of 3d4081b (Added code for modals)
   return {
     add: add,
     getAll: getAll,
@@ -174,7 +133,7 @@ let pokemonRepository = (function () {
   };
 })();
 
-//Creates list of pokemon on the HTML page
+//Loads list of pokemon from the Url and adds them to the pokemonList array
 pokemonRepository.loadList().then(function() {
   pokemonRepository.getAll().forEach(function(pokemon) {
     pokemonRepository.addListItem(pokemon);

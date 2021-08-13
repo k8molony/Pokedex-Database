@@ -13,13 +13,11 @@ li {
   list-style-type: none;
 }
 
-html {
-  background-color: var(--primary-color);
-}
-
 body {
   font-family: 'Acme', sans-serif;
   color: var(--text-color);
+  background-color: var(--primary-color);
+  margin-top: 60px;
 }
 
 .button-class {
