@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Pokemon Database</title>
+    <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
@@ -17,37 +18,32 @@
         <span class="navbar-brand mb-0 h1"> Pokédex</span>
         <span class="text-center">List of First Generation Pokemon. Click for stats!</span>
       </nav>
+      <form class="form-inline justify-content-center">
+        <input class="form-control" id="searchBar" type="search" placeholder="Search Pokémon" aria-label="Search">
+      </form>
     </header>
 
     <main class="container">
       <div class="row">
-        <div class="col-sm"></div>
-        <div class="col-sm">
-          <ul class='pokemon-list list-group list-unstyled'></ul>
-          <button type="button" class="btn-lg btn-primary" data-toggle="modal" data-target="#pokemonModal">
-          </button>
-          <div class="modal fade" id="pokemonModal" tabindex="-1" role="dialog" aria-labelledby="pokemonModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title text-capitalize" id="pokemonModalLabel"></h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  ...
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+        <div class='pokemon-list list-group list-unstyled'></div>
+        <div class="modal fade" id="pokemonModal" tabindex="-1" role="dialog" aria-labelledby="pokemonModal" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="pokemonModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body text-capitalize">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
-        <!--button id='show-modal'>Show modal</button-->
         </div>
-        <!--div id='modal-container'></div-->
-        <div class="col-sm"></div>
       </div>
 
     </main>
