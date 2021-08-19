@@ -53,9 +53,11 @@ let pokemonRepository = (function () {
 
   //function that retreives items from the pokemon api
   function loadList() {
+    showLoadingMessage();
     return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
+      hideLoadingMessage();
       json.results.forEach(function (item) {
         let pokemon = {
           name: item.name,
@@ -70,16 +72,23 @@ let pokemonRepository = (function () {
 
   //function to load details for each pokemon from the api
   function loadDetails (item) {
+    showLoadingMessage();
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
       return response.json();
     }).then(function (details) {
+      hideLoadingMessage();
       item.imageUrlFront = details.sprites.front_default;
       item.imageUrlBack = details.sprites.back_default;
       item.height = details.height;
+      item.weight = details.weight;
       item.types = [];
       for (let i = 0; i < details.types.length; i++) {
         item.types.push(details.types[i].type.name);
+      }
+      item.abilities = [];
+      for (let i = 0; i < details.abilities.length; i++) {
+        item.abilities.push(details.abilities[i].ability.name);
       }
     }).catch(function (e) {
       console.error(e);
@@ -97,7 +106,6 @@ let pokemonRepository = (function () {
   function showModal(item) {
     let modalBody = $('.modal-body');
     let modalTitle = $('.modal-title');
-    let modalHeader = $('.modal-header');
     //clear existing content of modal
     modalTitle.empty();
     modalBody.empty();
@@ -111,15 +119,21 @@ let pokemonRepository = (function () {
     imageElementBack.attr('src', item.imageUrlBack);
     //create height element for modal content
     let heightElement = $('<p>' + 'Height: ' + item.height + '</p>');
+    //create weight element for modal content
+    let weightElement = $('<p>' + 'Weight: ' + item.weight + '</p>');
     //create types element for modal content
-    let typesElement = $('<p>' + 'Types: ' + item.types + '</p>');
+    let typesElement = $('<p>' + 'Types: ' + item.types.join(', ') + '</p>');
+    //create abilities element for modal content
+    let abilitiesElement = $('<p>' + 'Abilities: ' + item.abilities.join(', ') + '</p>');
 
     //displays the seperate details inside the modal
     modalTitle.append(nameElement);
     modalBody.append(imageElementFront);
     modalBody.append(imageElementBack);
     modalBody.append(heightElement);
+    modalBody.append(weightElement);
     modalBody.append(typesElement);
+    modalBody.append(abilitiesElement);
   }
 
   //adds search background
