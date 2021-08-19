@@ -2,7 +2,7 @@
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
-  let searchInput = document.querySelector("#searchBar");
+  let searchInput = document.querySelector('#searchBar');
 
   // displays a loading message until the content has loaded
   function showLoadingMessage() {
@@ -17,13 +17,13 @@ let pokemonRepository = (function () {
   // Adds new pokemon to the pokemonList array with a conditional to make sure the correct type of data is entered
   function add(pokemon) {
     if (
-      typeof pokemon === "object" &&
-      "name" in pokemon &&
-      "detailsUrl" in pokemon
+      typeof pokemon === 'object' &&
+      'name' in pokemon &&
+      'detailsUrl' in pokemon
     ) {
       pokemonList.push(pokemon);
     } else {
-      console.log("pokemon is not correct");
+      console.log('pokemon is not correct');
     }
   }
 
@@ -41,8 +41,8 @@ let pokemonRepository = (function () {
     let button = document.createElement('button');
     button.innerText = pokemon.name;
     button.classList.add('button-class', 'btn', 'btn-primary', 'text-capitalize');
-    button.setAttribute("data-target", "#pokemonModal");
-    button.setAttribute("data-toggle", "modal");
+    button.setAttribute('data-target', '#pokemonModal');
+    button.setAttribute('data-toggle', 'modal');
 
     listpokemon.appendChild(button);
     pokemonList.appendChild(listpokemon);
@@ -95,24 +95,24 @@ let pokemonRepository = (function () {
 
   //function to open the modal to display details
   function showModal(item) {
-    let modalBody = $(".modal-body");
-    let modalTitle = $(".modal-title");
-    let modalHeader = $(".modal-header");
+    let modalBody = $('.modal-body');
+    let modalTitle = $('.modal-title');
+    let modalHeader = $('.modal-header');
     //clear existing content of modal
     modalTitle.empty();
     modalBody.empty();
 
     //create element for name in modal content
-    let nameElement = $("<h1>" + item.name + "</h1>");
+    let nameElement = $('<h1>' + item.name + '</h1>');
     //create image in modal content
     let imageElementFront = $('<img class="modal-img" style="width:50%">');
-    imageElementFront.attr("src", item.imageUrlFront);
+    imageElementFront.attr('src', item.imageUrlFront);
     let imageElementBack = $('<img class="modal-img" style="width:50%">');
-    imageElementBack.attr("src", item.imageUrlBack);
+    imageElementBack.attr('src', item.imageUrlBack);
     //create height element for modal content
-    let heightElement = $("<p>" + "Height: " + item.height + "</p>");
+    let heightElement = $('<p>' + 'Height: ' + item.height + '</p>');
     //create types element for modal content
-    let typesElement = $("<p>" + "Types: " + item.types + "</p>");
+    let typesElement = $('<p>' + 'Types: ' + item.types + '</p>');
 
     //displays the seperate details inside the modal
     modalTitle.append(nameElement);
@@ -123,15 +123,15 @@ let pokemonRepository = (function () {
   }
 
   //adds search background
-  searchInput.addEventListener("input", function() {
-    let listItem = document.querySelectorAll("li");
+  searchInput.addEventListener('input', function() {
+    let listItem = document.querySelectorAll('li');
     let value = searchInput.value.toUpperCase();
 
     listItem.forEach(function(pokemon) {
       if (pokemon.innerText.toUpperCase().indexOf(value) > -1) {
-        pokemon.style.display = "";
+        pokemon.style.display = '';
       } else {
-        pokemon.style.display = "none";
+        pokemon.style.display = 'none';
       }
     });
   });
